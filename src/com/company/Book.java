@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Book {
@@ -64,5 +65,23 @@ public class Book {
         }
 
         return authorNames.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Double.compare(book.price, price) == 0 &&
+                qty == book.qty &&
+                name.equals(book.name) &&
+                Arrays.equals(authors, book.authors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, price, qty);
+        result = 31 * result + Arrays.hashCode(authors);
+        return result;
     }
 }

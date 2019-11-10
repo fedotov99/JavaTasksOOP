@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Objects;
+
 public class MyTriangle {
     MyPoint v1;
     MyPoint v2;
@@ -54,5 +56,20 @@ public class MyTriangle {
         else {
             return "Triangle is " + TriangleType.SCALENE;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyTriangle that = (MyTriangle) o;
+        return v1.equals(that.v1) &&
+                v2.equals(that.v2) &&
+                v3.equals(that.v3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(v1, v2, v3);
     }
 }
